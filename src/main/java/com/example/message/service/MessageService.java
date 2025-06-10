@@ -18,8 +18,8 @@ public class MessageService {
         return repository.findAll();
     }
 
-    public void addMessage(String name, String text){
-        repository.save(new Message(name,text));
+    public void addMessage(String name, String deadline){
+        repository.save(new Message(name,deadline.toString()));
     }
 
     // ① 完了処理：update_todo に対応

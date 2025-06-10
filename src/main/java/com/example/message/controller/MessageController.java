@@ -26,13 +26,13 @@ public class MessageController {
 
     @PostMapping("/post")
     public String post(@RequestParam String name,
-                       @RequestParam String text,
+                       @RequestParam String deadline,
                        Model model) {
-        if(name.isBlank() || text.isBlank()){
+        if(name.isBlank() || deadline.isBlank()){
             model.addAttribute("error", "名前とメッセージは必須です");
 
         }else{
-            service.addMessage((name), text);
+            service.addMessage((name), deadline);
         }
         
         List<Message> messages = service.getAllMessages();

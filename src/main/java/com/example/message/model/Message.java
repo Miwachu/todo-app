@@ -10,19 +10,23 @@ public class Message {
     private Long id;
  
     private String name;
-    private String text;
+
+    private String deadline;
  
     // ★ 新增：完成状态字段
     private boolean done;
  
+
     public Message() {
         // JPA 要求的无参构造器
     }
+
  
     public Message(String name, String text) {
         this.name = name;
-        this.text = text;
+        this.deadline = deadline;
         this.done = false;  // 默认未完成
+
     }
  
  
@@ -35,9 +39,10 @@ public class Message {
     public String getName() {
         return name;
     }
- 
-    public String getText() {
-        return text;
+
+   public String getDeadline(){
+        return deadline;
+   
     }
  
     // ★ 新增 done 的 getter/setter
