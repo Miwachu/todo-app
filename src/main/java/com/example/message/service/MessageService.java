@@ -4,6 +4,7 @@ import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -18,7 +19,7 @@ public class MessageService {
         return repository.findAll();
     }
 
-    public void addMessage(String name, String text){
-        repository.save(new Message(name,text));
+    public void addMessage(String name, String deadline){
+        repository.save(new Message(name,deadline.toString()));
     }
 }

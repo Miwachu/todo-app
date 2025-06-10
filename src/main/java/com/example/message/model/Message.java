@@ -10,14 +10,14 @@ public class Message {
     private Integer id;
 
     private String name;
-    private String text;
+    private String deadline;
 
     public Message() {
     }
 
-    public Message(String name, String text) {
+    public Message(String name, String deadline) {
         this.name = name;
-        this.text = text;
+        this.deadline = deadline;
     }
 
     public Integer getId(){
@@ -28,8 +28,8 @@ public class Message {
         return name;
     }
 
-    public String getText(){
-        return text;
+    public String getDeadline(){
+        return deadline;
     }
 
 }
