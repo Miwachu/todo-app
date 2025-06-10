@@ -39,4 +39,17 @@ public class MessageController {
         model.addAttribute("messages", messages);
         return "index";
     }
+
+    @PostMapping("/update_todo")
+    public String updateTodo(@RequestParam("todo_id") Long id) {
+        service.updateMessage(id);        // 你的 Service 里应该有对应的 update 方法
+        return "redirect:/";                  // 相当于 redirect(url_for('show_todos'))
+    }
+ 
+    /** 削除処理（delete_todo に対応） */
+    @PostMapping("/delete_todo")
+    public String deleteTodo(@RequestParam("todo_id") Long id) {
+        service.deleteMessage(id);        // 你的 Service 里应该有对应的 delete 方法
+        return "redirect:/";
+    }
 }
