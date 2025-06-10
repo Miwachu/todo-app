@@ -21,4 +21,18 @@ public class MessageService {
     public void addMessage(String name, String deadline){
         repository.save(new Message(name,deadline.toString()));
     }
+
+    // ① 完了処理：update_todo に対応
+    public void updateMessage(Long id) {
+        repository.findById(id).ifPresent(message -> {
+            // 假设你给 Message 加了 done 字段
+            message.setDone(true);
+            repository.save(message);
+        });
+    }
+ 
+    // ② 削除処理：delete_todo に対応
+    public void deleteMessage(Long id) {
+        repository.deleteById(id);
+    }
 }
