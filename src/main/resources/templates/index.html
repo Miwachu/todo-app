@@ -21,7 +21,7 @@
 
 <li th:each="msg : ${messages}">
 <strong th:text="${msg.name}">名前</strong>:
-<span th:text="${msg.text}">本文</span>
+<span th:text="${msg.deadline}"></span>
  
             <!-- ★ 显示完成状态 -->
 <span th:if="${msg.done}" style="color:green;">（完了）</span>
