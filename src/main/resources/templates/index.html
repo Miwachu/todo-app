@@ -85,6 +85,11 @@
 
         <!-- ボタンエリア -->
         <div class="todo-buttons">
+            <!-- 「編集」ボタン：常に表示 -->
+            <form th:action="@{'/edit/' + ${msg.id}}" method="get" style="display:inline">
+            <button type="submit">Edit</button>
+            </form>
+            
             <!-- 「完了」ボタン：未完了の時だけ表示 -->
             <form th:if="!${msg.done}" th:action="@{/update_todo}" method="post">
                 <input type="hidden" name="todo_id" th:value="${msg.id}" />
@@ -96,6 +101,7 @@
                 <input type="hidden" name="todo_id" th:value="${msg.id}" />
                 <button type="submit">Delete</button>
             </form>
+
         </div>
     </li>
 </ul>
