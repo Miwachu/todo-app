@@ -35,4 +35,17 @@ public class MessageService {
     public void deleteMessage(Long id) {
         repository.deleteById(id);
     }
+
+    public Message getMessageById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public void updateMessageContent(Long id, String name, String deadline) {
+        repository.findById(id).ifPresent(message -> {
+            message.setName(name);
+            message.setDeadline(deadline);
+            repository.save(message);
+        });
+    }
+
 }

@@ -52,4 +52,18 @@ public class MessageController {
         service.deleteMessage(id);        // 你的 Service 里应该有对应的 delete 方法
         return "redirect:/";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editTodo(@PathVariable Long id, Model model) {
+        Message message = service.getMessageById(id);
+        model.addAttribute("editMessage", message);
+        model.addAttribute("messages", service.getAllMessages());
+        return "edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateTodo(@PathVariable Long id, @RequestParam String name, @RequestParam String deadline) {
+        service.updateMessageContent(id, name, deadline);
+        return "redirect:/";
+    }
 }

@@ -22,7 +22,7 @@ public class Message {
     }
 
  
-    public Message(String name, String text) {
+    public Message(String name, String deadline) {
         this.name = name;
         this.deadline = deadline;
         this.done = false;  // 默认未完成
@@ -44,9 +44,14 @@ public class Message {
         return deadline;
    
     }
- 
-    // ★ 新增 done 的 getter/setter
- 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
     public boolean isDone() {
         return done;
     }
