@@ -2,7 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>メッセージ一覧</title>
+<title>todoapp</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    form {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    input[type="text"], input[type="date"] {
+        padding: 5px;
+        margin-right: 10px;
+    }
+
+    button {
+        padding: 5px 10px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px 20px;
+        margin: 10px auto;
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .todo-buttons {
+        margin-top: 10px;
+    }
+
+    .todo-buttons form {
+        display: inline;
+    }
+
+    .done-label {
+        color: green;
+        margin-left: 10px;
+    }
+</style>
+
 </head>
 <body>
 
@@ -17,32 +74,31 @@
 
     <p th:if="${error}" th:text="${error}" style="color:red;"></p>
  
-    <ul>
+   <ul>
+    <li th:each="msg : ${messages}">
+        <strong th:text="${msg.name}">名前</strong>
+        <span th:text="${msg.deadline}"></span>
 
-<li th:each="msg : ${messages}">
-<strong th:text="${msg.name}">名前</strong>:
-<span th:text="${msg.deadline}"></span>
- 
-            <!-- ★ 显示完成状态 -->
-<span th:if="${msg.done}" style="color:green;">（完了）</span>
- 
-            <!-- ★ 完了ボタン：未完了のみ表示 -->
-<form th:if="!${msg.done}"
+        <!-- もし完了済みなら「(完了)」を表示 -->
+        <span th:if="${msg.done}" class="done-label">(完了)</span>
 
-                  th:action="@{/update_todo}" method="post"
+        <!-- ボタンエリア -->
+        <div class="todo-buttons">
+            <!-- 「完了」ボタン：未完了の時だけ表示 -->
+            <form th:if="!${msg.done}" th:action="@{/update_todo}" method="post">
+                <input type="hidden" name="todo_id" th:value="${msg.id}" />
+                <button type="submit">完了</button>
+            </form>
 
-                  style="display:inline">
-<input type="hidden" name="todo_id" th:value="${msg.id}" />
-<button type="submit">完了</button>
-</form>
- 
-            <!-- ★ 削除ボタン -->
-<form th:action="@{/delete_todo}" method="post" style="display:inline">
-<input type="hidden" name="todo_id" th:value="${msg.id}" />
-<button type="submit">削除</button>
-</form>
-</li>
+            <!-- 「削除」ボタン：常に表示 -->
+            <form th:action="@{/delete_todo}" method="post">
+                <input type="hidden" name="todo_id" th:value="${msg.id}" />
+                <button type="submit">削除</button>
+            </form>
+        </div>
+    </li>
 </ul>
+
 
 </body>
 </html>
