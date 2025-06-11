@@ -40,11 +40,11 @@ public class MessageController {
         return "index";
     }
 
-    @PostMapping("/update_todo")
-    public String updateTodo(@RequestParam("todo_id") Long id) {
-        service.updateMessage(id);        // 你的 Service 里应该有对应的 update 方法
-        return "redirect:/";                  // 相当于 redirect(url_for('show_todos'))
-    }
+    // @PostMapping("/update_todo")
+    // public String updateTodo(@RequestParam("todo_id") Long id) {
+    //     service.updateMessage(id);        // 你的 Service 里应该有对应的 update 方法
+    //     return "redirect:/";                  // 相当于 redirect(url_for('show_todos'))
+    // }
  
     /** 削除処理（delete_todo に対応） */
     @PostMapping("/delete_todo")
@@ -64,6 +64,16 @@ public class MessageController {
     @PostMapping("/update/{id}")
     public String updateTodo(@PathVariable Long id, @RequestParam String name, @RequestParam String deadline) {
         service.updateMessageContent(id, name, deadline);
+        return "redirect:/";
+    }
+
+    @PostMapping("/update_todo")
+    public String updateTodo(@RequestParam("todo_id") Long id, @RequestParam("action") String action) {
+        if ("done".equals(action)) {
+            service.updateMessage(id); // 完了にする
+        } else if ("undo".equals(action)) {
+            service.undoMessage(id);   // 未完了に戻す
+        }
         return "redirect:/";
     }
 }
