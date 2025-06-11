@@ -6,7 +6,7 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
+        background-color: whitesmoke;
         margin: 20px;
     }
 
@@ -36,8 +36,8 @@
     }
 
     li {
-        background-color: #fff;
-        border: 1px solid #ddd;
+        background-color: olivedrab;
+        border: 1px solid green;
         border-radius: 10px;
         padding: 15px 20px;
         margin: 10px auto;
@@ -55,7 +55,7 @@
     }
 
     .done-label {
-        color: green;
+        color: lightgreen;
         margin-left: 10px;
     }
 </style>
@@ -63,12 +63,12 @@
 </head>
 <body>
 
-<h1>todo app list</h1>
+<h1>Todo App List</h1>
  
 <form method="post" action="/post">
-<input type="text" name="name" placeholder="todo">
-<input type="date" name="deadline" placeholder="期限">
-<button type="submit">投稿</button>
+<input type="text" name="name" placeholder="Todo">
+<input type="date" name="deadline" placeholder="Duedate">
+<button type="submit">Submit</button>
 </form>
  
 
@@ -76,24 +76,24 @@
  
    <ul>
     <li th:each="msg : ${messages}">
-        <strong th:text="${msg.name}">名前</strong>
+        <strong th:text="${msg.name}">Name</strong>
         <span th:text="${msg.deadline}"></span>
 
         <!-- もし完了済みなら「(完了)」を表示 -->
-        <span th:if="${msg.done}" class="done-label">(完了)</span>
+        <span th:if="${msg.done}" class="done-label">(Done)</span>
 
         <!-- ボタンエリア -->
         <div class="todo-buttons">
             <!-- 「完了」ボタン：未完了の時だけ表示 -->
             <form th:if="!${msg.done}" th:action="@{/update_todo}" method="post">
                 <input type="hidden" name="todo_id" th:value="${msg.id}" />
-                <button type="submit">完了</button>
+                <button type="submit">Done</button>
             </form>
 
             <!-- 「削除」ボタン：常に表示 -->
             <form th:action="@{/delete_todo}" method="post">
                 <input type="hidden" name="todo_id" th:value="${msg.id}" />
-                <button type="submit">削除</button>
+                <button type="submit">Delete</button>
             </form>
         </div>
     </li>
