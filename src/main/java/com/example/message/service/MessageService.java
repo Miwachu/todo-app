@@ -48,4 +48,12 @@ public class MessageService {
         });
     }
 
+    // 未完了に戻す処理
+    public void undoMessage(Long id) {
+        repository.findById(id).ifPresent(message -> {
+            message.setDone(false);
+            repository.save(message);
+        });
+    }
+
 }

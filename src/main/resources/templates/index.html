@@ -67,11 +67,10 @@
 <h1>Todo App List</h1>
  
 <form method="post" action="/post">
-<input type="text" name="name" placeholder="Todo">
-<input type="date" name="deadline" placeholder="Duedate">
+    <input type="text" name="name" placeholder="Todo">
+    <input type="date" name="deadline" placeholder="Duedate">
 <button type="submit">Submit</button>
 </form>
- 
 
     <p th:if="${error}" th:text="${error}" style="color:red;"></p>
  
@@ -90,10 +89,18 @@
             <button type="submit">Edit</button>
             </form>
             
-            <!-- 「完了」ボタン：未完了の時だけ表示 -->
+           <!-- 「完了」ボタン：未完了の時だけ表示 -->
             <form th:if="!${msg.done}" th:action="@{/update_todo}" method="post">
                 <input type="hidden" name="todo_id" th:value="${msg.id}" />
+                <input type="hidden" name="action" value="done" />
                 <button type="submit">Done</button>
+            </form>
+
+            <!-- 「未完了に戻す」ボタン：完了済みの時だけ表示 -->
+            <form th:if="${msg.done}" th:action="@{/update_todo}" method="post">
+                <input type="hidden" name="todo_id" th:value="${msg.id}" />
+                <input type="hidden" name="action" value="undo" />
+                <button type="submit">Undo</button>
             </form>
 
             <!-- 「削除」ボタン：常に表示 -->
